@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mach Speed Visualization Tool</title>
+    <style>
+
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .slider-container {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 600px;
+        }
+
+
+        #gif-display img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 10px;
+            background: #ddd;
+            border-radius: 5px;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: black;
+            cursor: pointer;
+        }
+
+        #slider-value {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Shock Boundary Visualization Tool</h1>
+    <div id="gif-display">
+        <img id="current-gif" src="" alt="GIF will display here">
+    </div>
+  
+    <div class="slider-container">
+        <input id="gif-slider" type="range" min="0" max="3" value="0" step="1">
+        <div id="slider-value">Slider Index: 0</div>
+    </div>
+
+    <script>
+       
+        const gifPaths = [
+            '/Users/trist/Downloads/subsonicRxn.gif',
+            '/Users/trist/Downloads/sonicRxn.gif', 
+            '/Users/trist/Downloads/supersonicRxn.gif',
+            '/Users/trist/Downloads/hypersonicRxn.gif',
+        ];
+
+       
+        const slider = document.getElementById('gif-slider');
+        const gifDisplay = document.getElementById('current-gif');
+        const sliderValue = document.getElementById('slider-value');
+        const numbers = [0.3,1,3,5]
+
+        function updateGIF() {
+            const index = slider.value;
+            gifDisplay.src = gifPaths[index];
+            sliderValue.textContent = `Mach Number: ${numbers[index]}`;
+        }
+        gifDisplay.src = gifPaths[0];
+        sliderValue.textContent = `Mach Number: 0.3`;
+      
+        slider.addEventListener('input', updateGIF);
+    </script>
+</body>
+</html>
